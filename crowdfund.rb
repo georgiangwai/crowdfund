@@ -1,18 +1,43 @@
-#Bonus Round
+
+class Projects
+	def initialize(name, initfunds=0, targetfunds)
+		@name = name
+		@initfunds = initfunds
+		@targetfunds = targetfunds
+	end
+
+	def add_funds
+		@initfunds += 25
+		puts "#{@name} got more funds!"
+	end
 
 
-project1 = 'Project Save Water'
-project2 = 'Project Food Drive'
-project3 = 'Project Shelter'
-
-p1_funds = '$1000'
-p2_funds = '$500'
-p3_funds = '$200'
-
-puts "#{project1} has $1000 in funding.\nProjects:\n\t#{project1}\n\t#{project2}\n\t#{project3}"
+	def remove_funds
+		@initfunds -= 15
+		puts "#{@name} lost some funds!"
+	end
 
 
-puts "\t\t#{project1.ljust(40,'-')} #{p1_funds}"
-puts "\t\t#{project2.ljust(40,'-')} #{p2_funds}"
-puts "\t\t#{project3.ljust(40,'-')} #{p3_funds}"
+	def to_s
+		"#{@name} has $#{@initfunds} towards a goal of $#{@targetfunds}"
+	end
+end
 
+project1 = Projects.new("Project Save Water", 200, 1000)
+
+project2 = Projects.new("Project Food Drive", 100, 500)
+
+project3 = Projects.new("Project Shelter", 200)
+
+
+puts project1
+puts project2
+puts project3
+
+project1.remove_funds
+project2.add_funds
+project3.add_funds
+
+puts project1
+puts project2
+puts project3
