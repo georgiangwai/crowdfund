@@ -1,6 +1,6 @@
 
 class Projects
-	def initialize(name, initfunds=0, targetfunds)
+	def initialize(name, initfunds = 0, targetfunds)
 		@name = name
 		@initfunds = initfunds
 		@targetfunds = targetfunds
