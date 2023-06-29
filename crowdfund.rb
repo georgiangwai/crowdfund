@@ -1,43 +1,69 @@
 
-class Projects
-	def initialize(name, initfunds = 0, targetfunds)
+class Project
+	attr_reader :current_funds, :target_funds
+	attr_accessor :name
+
+
+	def initialize(name, init_funds = 0.00, target_funds)
 		@name = name
-		@initfunds = initfunds
-		@targetfunds = targetfunds
+		@current_funds = init_funds
+		@target_funds = target_funds
 	end
 
 	def add_funds
-		@initfunds += 25
+		@current_funds += 25
 		puts "#{@name} got more funds!"
 	end
 
 
 	def remove_funds
-		@initfunds -= 15
+		@current_funds -= 15
 		puts "#{@name} lost some funds!"
 	end
 
 
 	def to_s
-		"#{@name} has $#{@initfunds} towards a goal of $#{@targetfunds}"
+		"#{@name} has $#{@current_funds} towards a goal of $#{@target_funds}"
+	end
+
+	def percentage
+		percentage = (@current_funds / @target_funds) * 100
+	end 
+end
+
+
+class ProjectCatalogue
+	def initialize
+		@projects = []
+	end
+
+	def add_project(project)
+		@projects << project
+	end
+
+	def list_projects
+		puts "There are #{@projects.length} projects occuring."
+		@projects.each do |project| 
+			puts "#{project.name} has achieved #{project.percentage}\% of its goal"
+		end	
 	end
 end
 
-project1 = Projects.new("Project Save Water", 200, 1000)
+catalogue = ProjectCatalogue.new 
 
-project2 = Projects.new("Project Food Drive", 100, 500)
+project1 = Project.new("Project Save Water", 200.00, 1000.00)
 
-project3 = Projects.new("Project Shelter", 200)
+project2 = Project.new("Project Food Drive", 100.00, 500.00)
+
+project3 = Project.new("Project Shelter", 200.00)
+
+project4 = Project.new("Boo", 100.00)
+catalogue.add_project(project1)
+
+catalogue.add_project(project2)
+catalogue.add_project(project3)
+catalogue.add_project(project4)
+
+catalogue.list_projects
 
 
-puts project1
-puts project2
-puts project3
-
-project1.remove_funds
-project2.add_funds
-project3.add_funds
-
-puts project1
-puts project2
-puts project3
